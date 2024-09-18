@@ -9,6 +9,11 @@ import { MessagesComponent } from './messages/messages.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { HeroService } from './hero.service';
 import { MessageService } from './message.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
+import { HeroSearchComponent } from './hero-search/hero-search.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +21,18 @@ import { MessageService } from './message.service';
     MessagesComponent,
     HeroesComponent,
     HeroDetailComponent,
+    DashboardComponent,
+    HeroSearchComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+      dataEncapsulation: false,
+    }),
+  ],
   providers: [HeroService, MessageService],
   bootstrap: [AppComponent],
 })
